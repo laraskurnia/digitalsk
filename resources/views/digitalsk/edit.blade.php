@@ -6,7 +6,7 @@
     <a href="{{ route('digitalsk2.index') }}" title="Kembali" class="btn-back">
         <i class="fas fa-arrow-left"></i>
     </a>
-    <form method="POST" action="{{ route('digitalsk2.update', $digitalsk->id) }}">
+    <form method="POST" action="{{ route('digitalsk2.update', $digitalsk->id) }}"  enctype="multipart/form-data">
     @csrf
     @method('PUT')
         <div class="form-group">
@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             <label for="file_pdf">File PDF</label>
-            <input type="number" class="form-control" id="file_pdf" name="file_pdf" value="{{ old('file_pdf', $digitalsk->file_pdf) }}">
+            <input type="file" class="form-control" id="file_pdf" name="file_pdf">
             @error('file_pdf')
                 <div class="text-danger">{{ $message }}</div>
             @enderror

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Cdahsboard extends Controller
+class Cdashboard extends Controller
 {
     public function index()
     {

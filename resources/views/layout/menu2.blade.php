@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <title>Digital SK</title>
+   <title>Disbunnak</title>
    <meta name="author" content="">
    <meta name="description" content="">
    <meta name="keywords" content="">
@@ -83,6 +83,12 @@
                            <i class="far fa-calendar-alt"></i>
                            <span>Digital SK</span>
                         </a>
+                     </li>
+                        <li class="nav-item">
+                           <a href="{{ route ('pangkat.index') }}" class="nav-link">
+                              <i class="icon ion-ios-briefcase-outline"></i>
+                              <span>Kenaikan Pangkat</span>
+                           </a>
                      </li>
                     
                   </ul>

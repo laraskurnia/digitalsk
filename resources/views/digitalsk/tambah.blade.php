@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label for="file_pdf">File PDF</label>
-            <input type="text" class="form-control" id="file_pdf" name="file_pdf" required>
+            <input type="file" class="form-control" id="file_pdf" name="file_pdf" required>
             @error('file_pdf') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
         

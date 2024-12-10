@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Cdahsboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cdigitalsk;
 use App\Http\Controllers\Clogin;
 use App\Http\Controllers\Cdashboard;
+use App\Http\Controllers\Cpangkat;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['cek_level:admin'])->group(function () {
     Route::resource('digitalsk2', Cdigitalsk::class);
+    Route::resource('pangkat', Cpangkat::class);
 });
 
 
