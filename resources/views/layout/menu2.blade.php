@@ -89,7 +89,7 @@
             <ul class="nav">
                <li class="nav-item dropdown nav--user online">
                   <a href="#" class="nav-link" data-toggle="dropdown">
-                     <span>Username</span>
+                     <span>{{ auth()->user()->name }}</span>
                      <i class="fa fa-angle-down"></i>
                   </a>
                   <ul class="dropdown-menu">
