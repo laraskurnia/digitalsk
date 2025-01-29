@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #037294; /* Biru malam */
+            background-color: #037294;
+            /* Biru malam */
             color: #fff;
             font-family: 'Arial', sans-serif;
             height: 100vh;
@@ -20,16 +22,17 @@
 
         .logo {
             position: absolute;
-            top: 15%; /* Posisikan lebih dekat ke atas (8% dari tinggi layar) */
-            left: 50%;
-            transform: translate(-55%, -50%); /* Memastikan logo benar-benar di tengah */
-            max-width: 300px; /* Ukuran maksimum logo diperbesar */
-            width: auto; /* Supaya proporsi logo tetap */
+            top: 15%;
+            left: 51%;
+            transform: translate(-55%, -50%);
+            max-width: 300px;
+            width: auto;
             height: auto;
         }
 
         .card {
-            background-color: #fff; /* Warna latar belakang card */
+            background-color: #fff;
+            /* Warna latar belakang card */
             border-radius: 10px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
             width: 100%;
@@ -73,6 +76,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Logo di luar form -->
     <img src="{{ asset('assets2/img/logodisbun.png') }}" alt="Logo" class="logo">
@@ -89,20 +93,22 @@
                             @csrf
                             <div class="form-group mb-3">
                                 <label for="username" class="form-control-label">Username:</label>
-                                <input type="text" name="username" class="form-control" placeholder="Enter your username" required>
+                                <input type="text" name="username" class="form-control"
+                                    placeholder="Enter your username" required>
                                 <div>
                                     @error('username')
-                                    <span class="error">{{ $message }}</span>
+                                        <span class="error">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="password" class="form-control-label">Password:</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                                <input type="password" name="password" class="form-control"
+                                    placeholder="Enter your password" required>
                                 <div>
                                     @error('password')
-                                    <span class="error">{{ $message }}</span>
+                                        <span class="error">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -122,4 +128,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
