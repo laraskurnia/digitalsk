@@ -9,10 +9,13 @@ class Mdigitalsk extends Model
 {
     use HasFactory;
 
-     // Nama tabel 
-     protected $table = 'digitalsk';
+    // Tentukan nama tabel secara eksplisit
+    protected $table = 'digitalsk';  // Tabel yang benar di database
 
-
-      // Kolom-kolom yang ada pada tabel
-    protected $fillable = ['nama_file', 'file_pdf', 'tanggal_upload'];
+    // Tentukan kolom yang bisa diisi secara massal
+    protected $fillable = [
+        'nama_file',
+        'file_pdf',
+        'tanggal_upload',
+    ];
 }

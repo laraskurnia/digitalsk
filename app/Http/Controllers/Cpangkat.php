@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mpangkat;
+use App\Models\MPangkat;
 use Illuminate\Http\Request;
 
 class Cpangkat extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $pangkat = Mpangkat::get();
+        // Mengambil semua data pangkat
+        $pangkat = MPangkat::all(); // Pastikan model sudah sesuai dengan tabel yang ada
         return view('pangkat.index', compact('pangkat'));
     }
 
@@ -18,6 +22,7 @@ class Cpangkat extends Controller
      */
     public function create()
     {
+        // Menampilkan form untuk tambah data
         return view('pangkat.form_tambah');
     }
 
@@ -26,29 +31,39 @@ class Cpangkat extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'nama' => 'required|string|max:10',
-        //     'periode' => 'required|string|max:255',
-        //     'pangkat_lama' => 'required|string|max:255',
-        //     'pangkat_baru' => 'required|in:Aktif,Tidak Aktif',
-        //     'jabatan' => 'required|in:',
-        //  ]);   
-        Mpangkat::create([
-            'nama'           => $request->nama,
-            'periode'        => $request->periode,
-            'pangkat_lama'   => $request->pangkat_lama,
-            'pangkat_baru'   => $request->pangkat_baru,
-            'jabatan'        => $request->jabatan,
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'periode' => 'required|string|max:255',
+            'pangkat_lama' => 'required|string|max:255',
+            'pangkat_baru' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
         ]);
-        return redirect()->route('pangkat.index')->with('success', 'Data kenaikan pangkat berhasil disimpan');
+
+        // Menyimpan data ke database
+        MPangkat::create([
+            'nama' => $request->nama,
+            'periode' => $request->periode,
+            'pangkat_lama' => $request->pangkat_lama,
+            'pangkat_baru' => $request->pangkat_baru,
+            'jabatan' => $request->jabatan,
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('pangkat.index')->with('status', [
+            'judul' => 'Berhasil!',
+            'pesan' => 'Data kenaikan pangkat berhasil disimpan.',
+            'icon' => 'success'
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Mpangkat $mpangkat)
+    public function show(MPangkat $mpangkat)
     {
-        //
+        // Tidak ada logika di sini dalam kode yang Anda kirimkan sebelumnya
+        // Bisa ditambahkan untuk menampilkan detail data
     }
 
     /**
@@ -56,7 +71,8 @@ class Cpangkat extends Controller
      */
     public function edit(string $id)
     {
-        $pangkat = Mpangkat::findOrFail($id);
+        // Mencari data berdasarkan ID
+        $pangkat = MPangkat::findOrFail($id);
         return view('pangkat.edit', compact('pangkat'));
     }
 
@@ -65,16 +81,33 @@ class Cpangkat extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $pangkat = Mpangkat::findOrFail($id);
-$pangkat->update([
-'nama' => $request->nama,
-'periode'=> $request->periode,
-'pangkat_lama' => $request->pangkat_lama,
-'pangkat_baru' => $request->pangkat_baru,
-'jabatan' => $request->jabatan,
-]);
-return redirect()->route('pangkat.index')->with('success', 'Data kenaikan pangkat berhasil 
-diupdate');
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'periode' => 'required|string|max:255',
+            'pangkat_lama' => 'required|string|max:255',
+            'pangkat_baru' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+        ]);
+
+        // Mencari data berdasarkan ID
+        $pangkat = MPangkat::findOrFail($id);
+
+        // Update data di database
+        $pangkat->update([
+            'nama' => $request->nama,
+            'periode' => $request->periode,
+            'pangkat_lama' => $request->pangkat_lama,
+            'pangkat_baru' => $request->pangkat_baru,
+            'jabatan' => $request->jabatan,
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('pangkat.index')->with('status', [
+            'judul' => 'Berhasil!',
+            'pesan' => 'Data kenaikan pangkat berhasil diperbarui.',
+            'icon' => 'success'
+        ]);
     }
 
     /**
@@ -82,8 +115,15 @@ diupdate');
      */
     public function destroy(string $id)
     {
-        $pangkat = Mpangkat::findOrFail($id);
+        // Mencari data berdasarkan ID dan menghapusnya
+        $pangkat = MPangkat::findOrFail($id);
         $pangkat->delete();
-        return redirect()->route('pangkat.index')->with('success', 'Data kenaikan pangkat berhasil dihapus');
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('pangkat.index')->with('status', [
+            'judul' => 'Berhasil!',
+            'pesan' => 'Data kenaikan pangkat berhasil dihapus.',
+            'icon' => 'success'
+        ]);
     }
 }

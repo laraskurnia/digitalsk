@@ -11,7 +11,6 @@
    <meta name="keywords" content="">
 
    <link rel="icon" href="favicon.png" type="image/png">
-
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CMontserrat:400,500">
 
    <!-- Stylesheets -->
@@ -34,6 +33,42 @@
    <link href="https://cdn.datatables.net/2.1.3/css/dataTables.dataTables.css" rel="stylesheet">
 
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+   <style>
+      /* Warna teks default hitam */
+      .dropdown-menu a {
+         color: #000 !important; /* Hitam */
+      }
+   
+      /* Warna teks dan latar belakang saat di-highlight (hover atau fokus) */
+      .dropdown-menu a:hover,
+      .dropdown-menu a:focus {
+         color: #037294 !important; /* Biru untuk teks */
+         background-color: #e9ecef; /* Latar belakang abu-abu muda */
+      }
+   
+      /* Ikon mengikuti warna teks */
+      .dropdown-menu a i {
+         color: #000 !important; /* Hitam secara default */
+      }
+   
+      .dropdown-menu a:hover i,
+      .dropdown-menu a:focus i {
+         color: #037294 !important; /* Biru untuk ikon saat di-highlight */
+      }
+   
+      /* Warna latar belakang default untuk bar */
+      .dropdown-menu {
+         background-color: #fff; /* Putih */
+      }
+   
+      /* Tambahkan transisi agar animasi lebih halus */
+      .dropdown-menu a {
+         transition: background-color 0.2s, color 0.2s;
+      }
+   </style>
+   
+   
    
 </head>
 
@@ -42,7 +77,7 @@
       <header class="navbar navbar-fixed">
          <div class="navbar--header">
             <a href="#" class="logo">
-               <h3>Disbunnak</h3>
+               <img src="{{ asset('assets2/img/logodisbun.png') }}" alt="Disbunnak Logo" style="height: 40px; margin-top: 30px;">
             </a>
          </div>
 
@@ -58,8 +93,8 @@
                      <i class="fa fa-angle-down"></i>
                   </a>
                   <ul class="dropdown-menu">
-                     <li><a href="profile.html"><i class="far fa-user"></i>Profile</a></li>
-                     <li><a href="{{ route('logout')}}"><i class="fa fa-power-off"></i>Logout</a></li>
+                     {{-- <li><a href="profile.html"><i class="far fa-user"></i> Profile</a></li> --}}
+                     <li><a href="{{ route('logout')}}"><i class="fa fa-power-off"></i> Logout</a></li>
                   </ul>
                </li>
             </ul>
@@ -80,17 +115,16 @@
                      
                      <li>
                         <a href="{{route('digitalsk2.index')}}">
-                           <i class="far fa-calendar-alt"></i>
+                           <i class="fa fa-file-pdf"></i>
                            <span>Digital SK</span>
                         </a>
                      </li>
-                        <li class="nav-item">
-                           <a href="{{ route ('pangkat.index') }}" class="nav-link">
-                              <i class="icon ion-ios-briefcase-outline"></i>
-                              <span>Kenaikan Pangkat</span>
-                           </a>
+                     <li class="nav-item">
+                        <a href="{{ route ('pangkat.index') }}" class="nav-link">
+                           <i class="fa fa-arrow-circle-up"></i>
+                           <span>Kenaikan Pangkat</span>
+                        </a>
                      </li>
-                    
                   </ul>
                </li>
          </div>
@@ -101,14 +135,12 @@
          <section class="main--content">
             <div class="panel">
                <div class="panel-content">
-
-                @yield('konten2')
-
+                  @yield('konten2')
                </div>
             </div>
          </section>
          <footer class="main--footer main--footer-light">
-            SMK Telkom Banjarbaru 2024
+            © 2024 Disbunnak
          </footer>
       </main>
    </div>
@@ -134,11 +166,10 @@
 
    <script src="//code.jquery.com/jquery-3.7.1.js"></script>
    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
-   <!-- Page Level Scripts -->
+
+   <script>
+      new DataTable('#example');
+   </script>
 </body>
 
 </html>
-
-<script>
-   new DataTable('#example');
-</script>

@@ -8,9 +8,9 @@ use App\Http\Controllers\Cdashboard;
 use App\Http\Controllers\Cpangkat;
 
 /*
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------------
 | Web Routes
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
@@ -24,19 +24,22 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-	Route::get('/', function () {
+    Route::get('/', function () {
         return view('welcome');
     })->name('home');
 
     Route::get('/logout', [Clogin::class, 'logout'])->name('logout');
     Route::get('/dashboard', [Cdashboard::class, 'index'])->name('dashboard');
 
+    Route::middleware(['cek_level:admin'])->group(function () {
+        // Resource routes for Cdigitalsk and Cpangkat
+        Route::resource('digitalsk2', Cdigitalsk::class);
+        
+        // Resource route for Cpangkat (this will include edit, update, create, store, destroy)
+        Route::resource('pangkat', Cpangkat::class);
 
-
-Route::middleware(['cek_level:admin'])->group(function () {
-    Route::resource('digitalsk2', Cdigitalsk::class);
-    Route::resource('pangkat', Cpangkat::class);
-});
-
-
+        // Additional routes for manually handling 'edit' and 'update'
+        Route::get('/pangkat/{id}/edit', [Cpangkat::class, 'edit'])->name('pangkat.edit');
+        Route::put('/pangkat/{id}', [Cpangkat::class, 'update'])->name('pangkat.update');
+    });
 });
