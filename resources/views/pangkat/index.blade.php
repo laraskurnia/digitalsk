@@ -11,6 +11,15 @@
             background-color: #D9EAFD;
             color: #212121;
         }
+
+        /* Menggunakan flexbox untuk memastikan modal di tengah */
+        .modal-dialog {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(20%);
+            max-width: 80%;
+        }
     </style>
 
     <a href="{{ route('home') }}" class="btn btn-secondary btn-sm" title="Home">
@@ -154,24 +163,7 @@
         </script>
     @endif
 
-    <style>
-        /* Menggunakan flexbox untuk memastikan modal di tengah */
-        .modal-dialog {
-            display: flex;
-            /* Aktifkan flexbox */
-            justify-content: center;
-            /* Pastikan modal tetap berada di tengah */
-            align-items: center;
-            /* Vertikal center */
 
-            /* Mengatur transformasi untuk geser kanan */
-            transform: translateX(20%);
-            /* Geser modal 20% ke kanan */
-
-            /* Ukuran maksimum modal */
-            max-width: 80%;
-        }
-    </style>
     <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <form method="POST" action="{{ route('pangkat.store') }}" enctype="multipart/form-data">
