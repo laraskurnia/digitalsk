@@ -1,29 +1,24 @@
 @extends('layout.menu2')
+
 @section('konten2')
     <style>
-        /* Mengubah warna highlight teks */
         ::selection {
             background-color: #D9EAFD;
-            /* Warna highlight */
             color: #000000;
-            /* Warna teks saat disorot */
         }
 
-        /* Dukungan untuk Webkit */
         ::-webkit-selection {
             background-color: #D9EAFD;
-            /* Warna highlight */
             color: #000000;
-            /* Warna teks saat disorot */
         }
 
         .modal-dialog {
+            max-width: 50%;
+            margin: auto;
             display: flex;
-            justify-content: center;
             align-items: center;
-
-            transform: translateX(20%);
-            max-width: 80%;
+            justify-content: center;
+            min-height: calc(100% - 3.5rem);
         }
     </style>
 
@@ -52,19 +47,17 @@
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td class="text-center">{{ $d->nama_file }}</td>
-                        <td class="text-center">{{ $d->file_pdf }}
+                        <td class="text-center">
                             <a href="{{ Storage::url('pdf/' . $d->file_pdf) }}" target="_blank" class="btn btn-sm btn-info">
                                 Lihat PDF
                             </a>
                         </td>
                         <td class="text-center">{{ $d->tanggal_upload }}</td>
                         <td class="text-center">
-                            <form onsubmit="return confirm('Yakin hapus data?');" method="POST"
-                                action="{{ route('digitalsk2.destroy', $d->id) }}">
+                            <form onsubmit="return confirm('Yakin hapus data?');" method="POST" action="{{ route('digitalsk2.destroy', $d->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <a href="#" class="btn btn-success btn-sm mb-2" data-toggle="modal"
-                                    data-target="#editModal">
+                                <a href="#" class="btn btn-success btn-sm mb-2" data-toggle="modal" data-target="#editModal{{ $d->id }}">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
                                 <button type="submit" class="btn btn-danger btn-sm mb-2">
@@ -73,11 +66,10 @@
                             </form>
                         </td>
                     </tr>
-                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <form method="POST" action="{{ route('digitalsk2.update', $d->id) }}"
-                                enctype="multipart/form-data">
+
+                    <div class="modal fade" id="editModal{{ $d->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <form method="POST" action="{{ route('digitalsk2.update', $d->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="modal-content">
@@ -88,30 +80,17 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <!-- Input fields -->
                                         <div class="form-group">
                                             <label for="nama_file">Nama File</label>
-                                            <input type="text" class="form-control" id="nama_file" name="nama_file"
-                                                value="{{ old('nama_file', $d->nama_file) }}">
-                                            @error('nama_file')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
+                                            <input type="text" class="form-control" id="nama_file" name="nama_file" value="{{ old('nama_file', $d->nama_file) }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="file_pdf">File PDF</label>
                                             <input type="file" class="form-control" id="file_pdf" name="file_pdf">
-                                            @error('file_pdf')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="tanggal_upload">Tanggal Upload</label>
-                                            <input type="date" class="form-control" id="tanggal_upload"
-                                                name="tanggal_upload"
-                                                value="{{ old('tanggal_upload', $d->tanggal_upload) }}">
-                                            @error('tanggal_upload')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
+                                            <input type="date" class="form-control" id="tanggal_upload" name="tanggal_upload" value="{{ old('tanggal_upload', $d->tanggal_upload) }}">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -127,32 +106,8 @@
         </table>
     </div>
 
-    @if (session('status'))
-        <script>
-            Swal.fire({
-                title: "{{ session('status')['judul'] }}",
-                text: "{{ session('status')['pesan'] }}",
-                icon: "{{ session('status')['icon'] }}",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-    @endif
-
-    @if ($errors->any())
-        <script>
-            Swal.fire({
-                title: 'Ada Kesalahan!',
-                text: '{{ $errors->first() }}',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    @endif
-
-    <!-- Modal Tambah Data -->
     <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <form method="POST" action="{{ route('digitalsk2.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-content">
@@ -166,24 +121,14 @@
                         <div class="form-group">
                             <label for="nama_file">Nama File</label>
                             <input type="text" class="form-control" id="nama_file" name="nama_file" required>
-                            @error('nama_file')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="file_pdf">File PDF</label>
                             <input type="file" class="form-control" id="file_pdf" name="file_pdf" required>
-                            @error('file_pdf')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="tanggal_upload">Tanggal Upload</label>
-                            <input type="date" class="form-control" id="tanggal_upload" name="tanggal_upload"
-                                required>
-                            @error('tanggal_upload')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <input type="date" class="form-control" id="tanggal_upload" name="tanggal_upload" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -198,4 +143,18 @@
             </form>
         </div>
     </div>
+
+    {{-- SweetAlert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('status'))
+        <script>
+            Swal.fire({
+                title: "{{ session('status')['judul'] }}",
+                text: "{{ session('status')['pesan'] }}",
+                icon: "{{ session('status')['icon'] }}",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+    @endif
 @endsection

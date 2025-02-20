@@ -22,8 +22,8 @@
 
         .logo {
             position: absolute;
-            top: 15%;
-            left: 51%;
+            top: 20%;
+            left: 50%;
             transform: translate(-55%, -50%);
             max-width: 300px;
             width: auto;

@@ -12,11 +12,21 @@
         </button>
 
         <style>
+            ::selection {
+                background-color: #D9EAFD;
+                color: #212121;
+            }
+    
+            ::-webkit-selection {
+                background-color: #D9EAFD;
+                color: #212121;
+            }
+    
+            /* Menggunakan flexbox untuk memastikan modal di tengah */
             .modal-dialog {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-
                 transform: translateX(20%);
                 max-width: 80%;
             }

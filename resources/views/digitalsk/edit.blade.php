@@ -13,19 +13,27 @@
 
         <style>
             .modal-dialog {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                max-width: 350px !important;
+                width: 100%;
+                margin: auto;
+            }
 
-                transform: translateX(20%);
-                max-width: 80%;
+            .modal-content {
+                width: 100%;
+            }
+
+            @media (min-width: 576px) {
+                .modal-dialog {
+                    max-width: 350px !important;
+                }
             }
         </style>
 
         <!-- Modal untuk Edit Data -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <form method="POST" action="{{ route('digitalsk2.update', $digitalsk->id) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('digitalsk2.update', $digitalsk->id) }}"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="modal-content">
@@ -39,7 +47,8 @@
                             <!-- Input fields -->
                             <div class="form-group">
                                 <label for="nama_file">Nama File</label>
-                                <input type="text" class="form-control" id="nama_file" name="nama_file" value="{{ old('nama_file', $digitalsk->nama_file) }}">
+                                <input type="text" class="form-control" id="nama_file" name="nama_file"
+                                    value="{{ old('nama_file', $digitalsk->nama_file) }}">
                                 @error('nama_file')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -53,7 +62,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="tanggal_upload">Tanggal Upload</label>
-                                <input type="date" class="form-control" id="tanggal_upload" name="tanggal_upload" value="{{ old('tanggal_upload', $digitalsk->tanggal_upload) }}">
+                                <input type="date" class="form-control" id="tanggal_upload" name="tanggal_upload"
+                                    value="{{ old('tanggal_upload', $digitalsk->tanggal_upload) }}">
                                 @error('tanggal_upload')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
